@@ -1,6 +1,7 @@
 package com.skill_connect.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skill_connect.app.model.User;
 import com.skill_connect.app.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class UserController {
@@ -43,5 +46,10 @@ public class UserController {
 	}
 		
 		
+	}
+//	getting token
+	@GetMapping("/csrf-token")
+	public CsrfToken getCsrfToken(HttpServletRequest request) {
+		return (CsrfToken)request.getAttribute("_csrf");
 	}
 }
